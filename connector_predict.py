@@ -2,7 +2,7 @@
 import predict
 import os
 
-
+#저장
 class Connect:
     def __init__(self, image_file):
         model_dir = 'imagenet_model'
