@@ -2,6 +2,7 @@
 
 import socketserver
 import threading
+import os
 
 import OCR
 import random
@@ -34,6 +35,10 @@ class RequestHandler(socketserver.StreamRequestHandler):
         file_size = socket.recv(1024) #이게 문제인듯?
 
 
+        #ValueError: invalid literal for int() with base 10: '173.5
+        print("-----",int(file_size))
+
+
         socket.sendall(file_size)
         print('set file size : ' + file_size.decode("utf-8")) # 이거 고침 ###
 
@@ -46,6 +51,7 @@ class RequestHandler(socketserver.StreamRequestHandler):
                 data = socket.recv(1024)
                 image_file.write(data)
                 data_tmp += data
+                # ValueError: invalid literal for int() with base 10: '173.5
                 if ((data_tmp.__len__())*100 == int(file_size)):
                     # check image file size
                     # print('received file size : {}'.format(data_tmp.__len__())*100)
@@ -58,6 +64,8 @@ class RequestHandler(socketserver.StreamRequestHandler):
             ocrString+=ocrStringArray[i]+" "
         print("stringOcr "+ocrString+" ")
 
+        os.remove(file_name) #다쓰고 삭제하는 코드
+
 
         # tensorflow image classfication
         #connector_inst = connector_predict.Connect(file_name)
@@ -68,7 +76,7 @@ class RequestHandler(socketserver.StreamRequestHandler):
 
         
 if __name__ == '__main__':
-    HOST = '13.209.22.163'
+    HOST = '172.31.32.109' # 서버로 올릴때 바꿔야함
     PORT = 8000
 
     server = socketserver.TCPServer((HOST, PORT), RequestHandler)
