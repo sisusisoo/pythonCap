@@ -76,7 +76,7 @@ class RequestHandler(socketserver.StreamRequestHandler):
 
         
 if __name__ == '__main__':
-    HOST = '172.31.32.109' # 서버로 올릴때 바꿔야함
+    HOST = '172.31.32.190' # 서버로 올릴때 바꿔야함
     PORT = 8000
 
     server = socketserver.TCPServer((HOST, PORT), RequestHandler)
