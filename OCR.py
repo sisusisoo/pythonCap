@@ -4,6 +4,7 @@ import pytesseract
 
 
 class OCRClASS: #클래스화 다른 클래스에서 객체화 하려면 이과정이 필요합니다!
+    #이거 지워야함
     pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
     imgPath1=""
